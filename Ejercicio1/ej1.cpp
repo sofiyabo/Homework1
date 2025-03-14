@@ -36,7 +36,7 @@ void imprimir(Matriz matriz, int n){
 }
 
 int main(){
-    int n = 3;
+    int n = 3; //ver si decide el usuario o entregar fijo
     Matriz matriz = matriz_cuadrada(n);
     imprimir(matriz, n);
     return 0;
