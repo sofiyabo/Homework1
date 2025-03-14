@@ -1,7 +1,6 @@
 /* a. Crear una función que dado un valor entero “n”, positivo y mayor a uno, devuelva una matriz cuadrada con valores como 
 en los siguientes ejemplos para n=2 y n=3:*/
 
-//container std::array
 #include <iostream>
 #include <vector>
 
@@ -21,9 +20,23 @@ Matriz matriz_cuadrada(int n){
 
 }
 
-
+void imprimir(Matriz matriz, int n){
+    int indice_columna = n -1;
+    int indice_fila = n-1;
+    //cada vez que i + 1 es multiplo de n tengo que subir fila (indice_fila -1)
+    //y el indice columna vuelve a ser n-1
+    for(int i = 0; i<n*n; i++){
+        std::cout << "M["<< indice_fila<< "][" << indice_columna<< "] = " << matriz[indice_fila][indice_columna]<< std::endl;
+        indice_columna--;
+        if(indice_columna == -1){
+            indice_fila--;
+            indice_columna = n-1;
+        }
+    }
+}
 
 int main(){
-    Matriz matriz = matriz_cuadrada(4);
+    Matriz matriz = matriz_cuadrada(2);
+    imprimir(matriz, 2);
     return 0;
 }
