@@ -5,9 +5,25 @@ en los siguientes ejemplos para n=2 y n=3:*/
 #include <iostream>
 #include <vector>
 
+using Matriz = std::vector<std::vector<int>>;
 
-int matriz_cuadrada(int n){
-    std::vector<std::vector<int>> matriz_cuad(n, std::vector<int>(n));
-    
+Matriz matriz_cuadrada(int n){
+    Matriz matriz_cuad(n, std::vector<int>(n));
+    int valor = 1;
 
+    for(int i = 0; i<n; i++){
+        for(int j=0; j<n; j++){
+            matriz_cuad[i][j] = valor;
+            valor ++;
+        }
+    }
+    return matriz_cuad;
+
+}
+
+
+
+int main(){
+    Matriz matriz = matriz_cuadrada(4);
+    return 0;
 }
