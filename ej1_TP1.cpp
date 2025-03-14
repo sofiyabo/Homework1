@@ -36,7 +36,8 @@ void imprimir(Matriz matriz, int n){
 }
 
 int main(){
-    Matriz matriz = matriz_cuadrada(2);
-    imprimir(matriz, 2);
+    int n = 3;
+    Matriz matriz = matriz_cuadrada(n);
+    imprimir(matriz, n);
     return 0;
 }
