@@ -6,13 +6,20 @@ Donde NivelSeveridad corresponderá con unas de las leyendas previamente mencion
 */
 #include <iostream>
 #include <fstream>
+#include <vector>
 using namespace std;
 
+vector<string> etiquetas = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"};
 
-void logMessage(string mensaje, string nivel){
+void logMessage(string mensaje, int nivel){
+    if(nivel<0 || nivel>= etiquetas.size()){
+        cout<< "El nivel de severidad ingresado no es correcto\n";
+        return;
+    }
+
     ofstream archivo("registro.txt", ios::app);
     if(archivo.is_open()){
-        archivo<< "[" << nivel << "] <" << mensaje << ">\n";
+        archivo<< "[" << etiquetas[nivel] << "] <" << mensaje << ">\n";
         archivo.close();
     }
     else{
@@ -21,5 +28,5 @@ void logMessage(string mensaje, string nivel){
 }
 
 int main(){
-    logMessage("faltan datos", "INFO");
+    logMessage("faltan datos", 1);
 }
