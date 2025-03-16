@@ -28,5 +28,15 @@ void logMessage(string mensaje, int nivel){
 }
 
 int main(){
-    logMessage("faltan datos", 1);
+    string mensaje;
+    cout << "Ingrese un mensaje:\n";
+    getline(cin, mensaje);
+    
+    int severidad;
+    cout << "NIVELES DE SEVERIDAD:\n 0: DEBUG\n 1: INFO\n 2: WARNING\n 3: ERROR\n 4: CRITICAL \nIngrese un nivel de severidad:";
+    cin >> severidad;
+    logMessage(mensaje, severidad);
+
+
+    return 0;
 }
