@@ -7,6 +7,7 @@ Donde NivelSeveridad corresponderá con unas de las leyendas previamente mencion
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 vector<string> etiquetas = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"};
@@ -27,16 +28,31 @@ void logMessage(string mensaje, int nivel){
     }
 }
 
-int main(){
-    string mensaje;
-    cout << "Ingrese un mensaje:\n";
-    getline(cin, mensaje);
+void logMessage(string mensaje_error, string archivo_input, int linea){
     
-    int severidad;
-    cout << "NIVELES DE SEVERIDAD:\n 0: DEBUG\n 1: INFO\n 2: WARNING\n 3: ERROR\n 4: CRITICAL \nIngrese un nivel de severidad:";
-    cin >> severidad;
-    logMessage(mensaje, severidad);
+    ofstream archivo("registro.txt", ios::app);
+    if(archivo.is_open()){
+        archivo<< "<" << mensaje_error << "> Archivo:" << archivo_input << ", Linea:" << linea << "\n";
+        archivo.close();
+    }
+    else{
+        cerr<< "Error abriendo archivo\n";
+    }
+}
 
+void logMessage(string mensaje_acceso, string usuario){
+    ofstream archivo("registro.txt", ios::app);
+    if(archivo.is_open()){
+        archivo<< "[SECURITY] " << mensaje_acceso << " " << usuario<< "\n";
+        archivo.close();
+    }
+    else{
+        cerr<< "Error abriendo archivo\n";
+    }
+
+}
+
+int main(){
 
     return 0;
 }

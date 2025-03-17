@@ -1,0 +1,2 @@
+[ERROR] <No se puede ejecutar>
+[INFO] <Accede a archivo>
