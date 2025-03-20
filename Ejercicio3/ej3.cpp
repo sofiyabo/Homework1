@@ -10,7 +10,7 @@ struct Nodo {
 
 struct lista_enlazada{
     unique_ptr<Nodo> head; //Unicamente un puntero al primer elemento.
-    size_t size = 0;
+    int size = 0;
 };
 
 unique_ptr<Nodo> create_node(int valor){
@@ -41,9 +41,49 @@ void push_back(lista_enlazada& lista, int valor){
         }
         actual = actual->next.get();
     }
+    lista.size++;
 }
 
-void print_lista(lista_enlazada& lista) {
+void insert(lista_enlazada& lista, int indice, int valor){
+    //Los indices de la lista se consideran de {0, ... n-1}
+    if(indice == 0){
+        push_front(lista, valor);
+        return;
+    }
+    else if(indice == lista.size -1){
+        push_back(lista, valor);
+        return;
+    }
+    else if(indice >= lista.size){
+        cout<< "El indice ingresado excede los indices del tamaño de la lista. El nodo fue agregado al final de la lista. \n";
+        push_back(lista, valor);
+        return;
+    }
+    else{
+        
+        int contador = 0;
+        Nodo* actual = lista.head.get();
+        
+        while(actual){
+            if(contador == indice -1){
+                unique_ptr<Nodo> nuevo_nodo = create_node(valor);
+                nuevo_nodo->next = move(actual->next);
+                actual->next = move(nuevo_nodo);
+                return;
+            }
+            actual = actual->next.get();
+            contador++;
+        }
+    }
+
+}
+
+void erase(lista_enlazada& lista, int indice, int valor){
+
+}
+
+
+void print_list(lista_enlazada& lista) {
     Nodo* nodo_actual = lista.head.get();
     while (nodo_actual) {
         cout << nodo_actual->valor << " ";
@@ -61,5 +101,9 @@ int main(){
     push_front(lista, 5);
     push_front(lista, 7);
     push_back(lista, 10);
-    print_lista(lista);
+    push_front(lista, 9);
+    insert(lista, 1, 17);
+    insert(lista, 15, 2);
+
+    print_list(lista);
 }
