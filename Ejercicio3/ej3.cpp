@@ -21,6 +21,7 @@ unique_ptr<Nodo> create_node(int valor){
 }
 
 void push_front(lista_enlazada& lista, int valor){ //Pasar lista por referencia
+
     //El nodo pasa a ser el nuevo head y su next es el head actual.
     unique_ptr<Nodo> nuevo_nodo = create_node(valor);
     nuevo_nodo->next = move(lista.head);
@@ -28,6 +29,7 @@ void push_front(lista_enlazada& lista, int valor){ //Pasar lista por referencia
     lista.size++;
     return;
 }
+
 
 void push_back(lista_enlazada& lista, int valor){
 
@@ -46,7 +48,11 @@ void push_back(lista_enlazada& lista, int valor){
 
 void insert(lista_enlazada& lista, int indice, int valor){
     //Los indices de la lista se consideran de {0, ... n-1}
-    if(indice == 0){
+    if(!lista.head){
+        cout<< "La lista esta vacia.\n";
+        return;
+    }
+    else if(indice == 0){
         push_front(lista, valor);
         return;
     }
@@ -74,11 +80,41 @@ void insert(lista_enlazada& lista, int indice, int valor){
             actual = actual->next.get();
             contador++;
         }
+        lista.size++;
     }
 
 }
 
-void erase(lista_enlazada& lista, int indice, int valor){
+void erase(lista_enlazada& lista, int indice){
+    
+    if(!lista.head){
+        cout<< "La lista esta vacia.\n";
+        return;
+    }
+    else if(indice >= lista.size){
+        cout << "El indice ingresado excede los elementos de la lista. Se borró el ultimo elemento.\n";
+        int contador = 0;
+        Nodo* actual = lista.head.get();
+        while(contador< lista.size-1){
+            actual= actual->next.get();
+            contador++;
+        }
+        actual->next = nullptr;
+        lista.size--;
+        return;
+    }
+    else{
+        int contador = 0;
+        Nodo* actual = lista.head.get();
+        while(contador != indice - 1){
+            actual = actual->next.get();
+            contador++;
+        }
+        actual->next = move(actual->next->next);
+        
+        lista.size--;
+        return;
+    }
 
 }
 
@@ -98,12 +134,13 @@ void print_list(lista_enlazada& lista) {
 
 int main(){
     lista_enlazada lista;
+
     push_front(lista, 5);
-    push_front(lista, 7);
     push_back(lista, 10);
+    push_front(lista, 7);
     push_front(lista, 9);
     insert(lista, 1, 17);
     insert(lista, 15, 2);
-
+    erase(lista, 14);
     print_list(lista);
 }

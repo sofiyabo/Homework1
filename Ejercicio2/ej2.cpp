@@ -7,6 +7,9 @@ using namespace std;
 
 vector<string> etiquetas = {"[DEBUG]", "[INFO]", "[WARNING]", "[ERROR]", "[CRITICAL]"};
 
+
+//PREGUNTAR SI TIENE QUE SER TRUNCADO O APPEND
+
 //Funcion de log del punto 2.a
 void logMessage(string mensaje, int nivel){
     if(nivel<0 || nivel>4){
@@ -14,7 +17,7 @@ void logMessage(string mensaje, int nivel){
         return;
     }
 
-    ofstream archivo("registro.txt", ios::app);
+    ofstream archivo("registro.txt", ios::trunc);
     if(archivo.is_open()){
         archivo<< etiquetas[nivel] << " <" << mensaje << ">\n";
         archivo.close();
@@ -27,7 +30,7 @@ void logMessage(string mensaje, int nivel){
 //Funcion de log de errores en archivos.
 void logMessage(string mensaje_error, string archivo_input, int linea){
     
-    ofstream archivo("registro.txt", ios::app);
+    ofstream archivo("registro.txt", ios::trunc);
     if(archivo.is_open()){
         archivo<< etiquetas[3]<< mensaje_error << " Archivo:" << archivo_input << ", Linea:" << linea << "\n";
         archivo.close();
@@ -39,7 +42,7 @@ void logMessage(string mensaje_error, string archivo_input, int linea){
 
 //Funcion de log de accesos.
 void logMessage(string mensaje_acceso, string usuario){
-    ofstream archivo("registro.txt", ios::app);
+    ofstream archivo("registro.txt", ios::trunc);
     if(archivo.is_open()){
         archivo<< "[SECURITY]" << mensaje_acceso << " " << usuario<< "\n";
         archivo.close();
@@ -50,10 +53,13 @@ void logMessage(string mensaje_acceso, string usuario){
 
 }
 
-int main(){ //PREGUNTAR COMO CARGAR CADA TIPO DE LOG
+int main(){ 
     try{
+        logMessage("Error en el software", 0);
         logMessage("Sistema iniciado correctamente", 1);
         logMessage("Fuga de memoria", 2);
+        logMessage("No se pudo acceder", 3);
+        logMessage("Alerta critica", 4);
         logMessage("Access Granted", "Sofia Yabo");
 
         throw runtime_error("Error de sistema");
