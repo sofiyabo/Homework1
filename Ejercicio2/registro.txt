@@ -1,4 +1,0 @@
-[INFO] <Sistema iniciado correctamente>
-[WARNING] <Fuga de memoria>
-[SECURITY]Access Granted Sofia Yabo
-[ERROR]Error de sistema Archivo:ej2.cpp, Linea:61

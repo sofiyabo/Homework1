@@ -8,7 +8,7 @@ using namespace std;
 vector<string> etiquetas = {"[DEBUG]", "[INFO]", "[WARNING]", "[ERROR]", "[CRITICAL]"};
 
 
-//PREGUNTAR SI TIENE QUE SER TRUNCADO O APPEND
+
 
 //Funcion de log del punto 2.a
 void logMessage(string mensaje, int nivel){
@@ -17,7 +17,7 @@ void logMessage(string mensaje, int nivel){
         return;
     }
 
-    ofstream archivo("registro.txt", ios::trunc);
+    ofstream archivo("registro.txt", ios::app);
     if(archivo.is_open()){
         archivo<< etiquetas[nivel] << " <" << mensaje << ">\n";
         archivo.close();
@@ -30,7 +30,7 @@ void logMessage(string mensaje, int nivel){
 //Funcion de log de errores en archivos.
 void logMessage(string mensaje_error, string archivo_input, int linea){
     
-    ofstream archivo("registro.txt", ios::trunc);
+    ofstream archivo("registro.txt", ios::app);
     if(archivo.is_open()){
         archivo<< etiquetas[3]<< mensaje_error << " Archivo:" << archivo_input << ", Linea:" << linea << "\n";
         archivo.close();
@@ -42,7 +42,7 @@ void logMessage(string mensaje_error, string archivo_input, int linea){
 
 //Funcion de log de accesos.
 void logMessage(string mensaje_acceso, string usuario){
-    ofstream archivo("registro.txt", ios::trunc);
+    ofstream archivo("registro.txt", ios::app);
     if(archivo.is_open()){
         archivo<< "[SECURITY]" << mensaje_acceso << " " << usuario<< "\n";
         archivo.close();
