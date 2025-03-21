@@ -30,18 +30,30 @@ int main(){
     
     //Tiempo de primera funcion: usando textos_iguales()
     auto startTime = chrono::high_resolution_clock::now();
-    textos_iguales("Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21", "Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21");
+    bool iguales = textos_iguales("Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21", "Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21");
     auto endTime = chrono::high_resolution_clock::now();
     auto elapsedTime = chrono::duration_cast<chrono::nanoseconds>( endTime - startTime);
-    cout << "A miProcesoAMedir le tomó:" << elapsedTime.count() << "nanosegundos" << endl;
-    
+    cout << "En tiempo de ejecucion tomó:" << elapsedTime.count() << "nanosegundos" << endl;
+    if(iguales){
+        cout<< "Los textos son iguales.\n";
+    }
+    else{
+        cout << "Los textos no son iguales";
+    }
+
     //Tiempo de segunda funcion: usando textos_iguales_comp() que lo hace en tiempo de compilacion
     auto startTime1 = chrono::high_resolution_clock::now();
-    textos_iguales_comp("Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21", "Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21");
+    bool iguales_compilacion = textos_iguales_comp("Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21", "Homework 1 I102 Paradigmas de Programación Fecha límite de entrega: Jueves 21");
     auto endTime1 = chrono::high_resolution_clock::now();
     auto elapsedTime1 = chrono::duration_cast<chrono::nanoseconds>( endTime1 - startTime1);
-    cout << "A miProcesoAMedir le tomó:" << elapsedTime1.count() << "nanosegundos" << endl;
+    cout << "En tiempo de compilacion tomó:" << elapsedTime1.count() << "nanosegundos" << endl;
     
+    if(iguales_compilacion){
+        cout<< "Los textos son iguales.\n";
+    }
+    else{
+        cout << "Los textos no son iguales";
+    }
 }
 
 /*La diferencia entre las dos funciones es que el uso del calificador constexpr
