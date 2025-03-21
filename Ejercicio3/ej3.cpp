@@ -36,6 +36,7 @@ void push_back(lista_enlazada& lista, int valor){
     unique_ptr<Nodo> nuevo_nodo = create_node(valor);
     Nodo* actual = lista.head.get();
 
+    //Recorro toda la lista hasta llegar al ultimo nodo, que es el unico que tiene su puntero a next como nullptr.
     while(actual){
         if(actual->next.get() == nullptr){
             actual->next = move(nuevo_nodo);
@@ -69,18 +70,20 @@ void insert(lista_enlazada& lista, int indice, int valor){
         
         int contador = 0;
         Nodo* actual = lista.head.get();
-        
-        while(actual){
+
+        //Recorrer la lista hasta llegar al indice anterior al indicado
+        while(true){
             if(contador == indice -1){
                 unique_ptr<Nodo> nuevo_nodo = create_node(valor);
                 nuevo_nodo->next = move(actual->next);
                 actual->next = move(nuevo_nodo);
+                lista.size++;
                 return;
             }
             actual = actual->next.get();
             contador++;
         }
-        lista.size++;
+
     }
 
 }
@@ -92,6 +95,8 @@ void erase(lista_enlazada& lista, int indice){
         return;
     }
     else if(indice >= lista.size){
+        //Uso un contador para avanzar en la lista hasta el ultimo elemento.
+    
         cout << "El indice ingresado excede los elementos de la lista. Se borró el ultimo elemento.\n";
         int contador = 0;
         Nodo* actual = lista.head.get();
@@ -104,6 +109,8 @@ void erase(lista_enlazada& lista, int indice){
         return;
     }
     else{
+        //Recorro la lista hasta el indice anterior al que quiero eliminar
+
         int contador = 0;
         Nodo* actual = lista.head.get();
         while(contador != indice - 1){
@@ -111,7 +118,6 @@ void erase(lista_enlazada& lista, int indice){
             contador++;
         }
         actual->next = move(actual->next->next);
-        
         lista.size--;
         return;
     }
@@ -121,7 +127,7 @@ void erase(lista_enlazada& lista, int indice){
 
 void print_list(lista_enlazada& lista) {
     Nodo* nodo_actual = lista.head.get();
-    while (nodo_actual) {
+    while (nodo_actual) { //Mientras hayan nodos, imprimir
         cout << nodo_actual->valor << " ";
         if(nodo_actual->next != nullptr){ 
             cout << "-> ";
@@ -136,11 +142,18 @@ int main(){
     lista_enlazada lista;
 
     push_front(lista, 5);
+
     push_back(lista, 10);
+
     push_front(lista, 7);
+
     push_front(lista, 9);
+
     insert(lista, 1, 17);
+
     insert(lista, 15, 2);
+
     erase(lista, 14);
+
     print_list(lista);
 }
