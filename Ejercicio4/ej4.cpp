@@ -4,7 +4,6 @@
 using namespace std;
 // funcion recursiva de ejecucion en tiempo de compilacion
 // comparar dos cadenas de texto: char* o string? uso const char* porque string usa memoria dinamica y no puede usarse para ejecucion en tiempo de compilacion
-// PREGUNTAR SI SE NECESITA OTRA FUNCION O COMO HACER LA COMPARACION
 
 
 bool textos_iguales(const char* texto1, const char* texto2){
