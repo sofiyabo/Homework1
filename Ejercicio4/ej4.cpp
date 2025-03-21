@@ -45,5 +45,6 @@ int main(){
 }
 
 /*La diferencia entre las dos funciones es que el uso del calificador constexpr
-hace que el compilador pueda realizar las operaciones en tiempo de compilacoin si como parametros se pasan cadenas de textos fijas y no variables.
+hace que el compilador pueda realizar las operaciones en tiempo de compilacion si los parametros 
+que se pasan son cadenas de textos fijas y no variables.
 */
