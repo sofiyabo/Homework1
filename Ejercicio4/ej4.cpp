@@ -20,7 +20,7 @@ bool textos_iguales(const char* texto1, const char* texto2){
 int main(){
     
     auto startTime = chrono::high_resolution_clock::now();
-    textos_iguales("porque yo no quiero trabajar, no quiero ir a estudiar", "porque yo no quiero trabajar, no quiero ir a estudiar");
+    textos_iguales("porque yo no quiero trabajar, no quiero ir a estudiar, no me quiero casar", "porque yo no quiero trabajar, no quiero ir a estudiar, no me quiero casar");
     auto endTime = chrono::high_resolution_clock::now();
     auto elapsedTime = chrono::duration_cast<chrono::nanoseconds>( endTime - startTime);
     cout << "A miProcesoAMedir le tomó:" << elapsedTime.count() << "nanosegundos" << endl;
